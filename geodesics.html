@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Nicolas Trutmann" />
+  <title>Ch. 12: The Energy of a Path</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Ch. 12: The Energy of a Path</h1>
+<p class="author">Nicolas Trutmann</p>
+</header>
+<p>We’ll prove what would seem intuitive, namely that geodesics are
+minima of both length and energy of a path between 2 points. That is the
+project we’re working towards.</p>
+<p>that was kind of the point of geodesics in the first place. They were
+defined with the intent of making a ’minimal path’ between two points;
+an analogue of the straight line in <span
+class="math inline">\(\mathbb{R}^{n}\)</span>.</p>
+<p>Let’s give a definition:</p>
+<div class="def">
+<p><strong>Definition 1</strong> (Energy of a Path). <em>Let <span
+class="math inline">\(\omega : \mathbb{R}^{} \rightarrow M\)</span> be a
+path on a Riemannian manifold with <span class="math inline">\(\omega(a)
+= p\)</span> and <span class="math inline">\(\omega(b) = q\)</span>.
+I.e. <span class="math inline">\(\omega \in \Omega_{p,q}(M)\)</span>
+<span class="math display">\[E_a^b(\omega) = \int_a^b
+\left\lVert\frac{d\omega}{dt}\right\rVert^2 dt\]</span></em></p>
+<p><em>We leave off the indices for curves parametrized on <span
+class="math inline">\([0,1]\)</span>, so <span class="math inline">\(E =
+E_0^1\)</span>.</em></p>
+</div>
+<div id="def:vel_of_var" class="def">
+<p><strong>Definition 2</strong>. <em>The velocity of a variation <span
+class="math inline">\(\alpha: (-\epsilon, \epsilon) \rightarrow
+\Omega(M;p,q)\)</span> with <span class="math inline">\(\alpha(0) =
+\omega\)</span> is defined as</em></p>
+<p><em><span class="math display">\[W_t = \frac{d\alpha}{du}(0)_t
+=\]</span></em></p>
+<p><em>It is the vector field along <span
+class="math inline">\(\omega\)</span> with <span class="math inline">\(W
+\in T\Omega_{\omega}\)</span>.</em></p>
+</div>
+<h2 id="the-proportional-to-arclength-argument">the proportional to
+arclength argument</h2>
+<p>a problem with curves is that we could parametrize them arbitrarily
+badly.</p>
+<div id="def:reparametrization" class="def">
+<p><strong>Definition 3</strong>. <em>We say a curve <span
+class="math inline">\(\gamma\)</span> is</em></p>
+</div>
+<h2 id="sleight-of-hand-calculus-of-variations">sleight of hand:
+calculus of variations</h2>
+<p>The big cheat of these chapters is that we’re able to do calculus on
+<span class="math inline">\(\Omega(M)\)</span>. This is a priori not a
+manifold, topological space, vector field or group. It becomes, however,
+after doing some math to it.</p>
+<p>In Milnor’s book <span class="citation" data-cites="milnor">(Milnor
+1963)</span>, this problem is explicitly brushed under the table. Books
+that treat the matter more thoroughly brush it under the table with a
+few more words <span class="citation" data-cites="salamon">(Salamon and
+Robbin 2022)</span>. Here is a reference that is explicit and thorough:
+<span class="citation" data-cites="lee">(Lee 2018)</span></p>
+<p>Since Milnor hand-waves the problem, so will we. Since we still need
+intuition for what we’re skipping I provide here two pictures, which we
+will pretend is how all the curves under scrutiny look like.</p>
+<figure id="fig:boat1">
+<img src="img/grid.png" />
+<figcaption>grid shape</figcaption>
+</figure>
+<figure id="fig:boat1">
+<img src="img/sail.png" />
+<figcaption>variation</figcaption>
+</figure>
+<h2 id="the-characterization-theorem">The Characterization Theorem</h2>
+<div class="thm">
+<p><strong>Theorem 1</strong> (Characterization of Geodesics). <em>Let
+<span class="math inline">\(I = [a, b] \subset \mathbb{R}^{}\)</span> be
+a compact interval and let <span class="math inline">\(\gamma : I
+\rightarrow M\)</span> be a smooth curve. Then the following are
+equivalent.</em></p>
+<ol>
+<li><p><em>γ is an extremal of the energy functional, i.e. every
+variation <span>γs</span>s∈R of γ with fixed endpoints satisfies d ds ∣
+∣s=0 E(γs) = 0.</em></p></li>
+<li><p><em>γ is parametrized proportional to the arclength, i.e. the
+veloc- ity | ̇γ(t)| ≡ c ≥ 0 is constant, and either γ is constant, i.e.
+γ(t) = p = q for all t ∈ I, or c &gt; 0 and γ is an extremal of the
+length functional, i.e. every variation <span>γs</span>s∈R of γ with
+fixed endpoints satisfies d ds ∣ ∣s=0 L(γs) = 0.</em></p></li>
+<li><p><em>The velocity vector of γ is parallel, i.e. ∇ ̇γ(t) = 0 for
+all t ∈ I.</em></p></li>
+<li><p><em>The acceleration of γ is normal to M , i.e. ̈γ(t) ⊥ Tγ(t)M
+for all t ∈ I.</em></p></li>
+</ol>
+</div>
+<h2 id="examples-and-edgecases">Examples and edgecases</h2>
+<p>Hyperbolic space</p>
+<p>Projective space</p>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-lee" class="csl-entry" role="listitem">
+Lee, John. 2018. <em>Introduction to Riemannian Manifolds</em>.
+International Series of Monographs on Physics. Springer International
+Publishing.
+</div>
+<div id="ref-milnor" class="csl-entry" role="listitem">
+Milnor, John. 1963. <em>Morse Theory</em>. Annals of Mathematics
+Studies. Princeton University Press.
+</div>
+<div id="ref-salamon" class="csl-entry" role="listitem">
+Salamon, Dietmar Arno, and Joel Robbin. 2022. <em>Introduction to
+Differential Geometry</em>. <a
+href="https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf">https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf</a>.
+</div>
+</div>
+</body>
+</html>

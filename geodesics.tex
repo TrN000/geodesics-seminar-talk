@@ -23,6 +23,7 @@
 \newcommand{\Absbars}[1]{\left\lVert#1\right\rVert}
 \newcommand{\rmfd}[1]{Riemannian manifold}
 \newcommand{\angle}[1]{\langle #1 \rangle}
+\newcommand{\OM}{\Omega(M)}
 
 \title{Ch. 12: The Energy of a Path}
 \author{Nicolas Trutmann}
@@ -32,21 +33,23 @@
 \maketitle
 
 
+\subsection{Definitions and Motivation}
+
 We'll prove what would seem intuitive, namely that geodesics are minima of both length and energy of
 a path between 2 points. That is the project we're working towards.
 
-that was kind of the point of geodesics in the first place. They were defined with the intent of
+That was kind of the point of geodesics in the first place. They were defined with the intent of
 making a 'minimal path' between two points; an analogue of the straight line in $\Rn$.
 
-Let's give a definition:
+Let's give the central definition of this chapter:
 
 \begin{def}[Energy of a Path]
 Let $\omega : \Rn[] \rightarrow M $ be a path on a \rmfd, with $\omega(a) = p$ and $\omega(b) = q$.
 I.e. $\omega \in \Omega_{p,q}(M)$
 \[ E_a^b(\omega) = \int_a^b \Absbars{\frac{d\omega}{dt}}^2 dt \]
-
-We leave off the indices for curves parametrized on $[0,1]$, so $E = E_0^1$.
 \end{def}
+
+TBD: similar to kinetic energy equation. some auth also put 1/2 in front to make it look more like it. (we'llalso see a factor 1/2 again.)
 
 \subsection{the proportional to arclength argument}
 
@@ -63,7 +66,6 @@ a problem with curves is that we could parametrize them arbitrarily badly.
 
 \subsection{sleight of hand: calculus of variations}
 
-\newcommand{\OM}{\Omega(M)}
 The big cheat of these chapters is that we're able to do calculus on $\OM$.
 This is a priori not a manifold, topological space, vector field or group.
 It becomes, however, after doing some math to it.
@@ -101,7 +103,7 @@ Reminder:
 
     \[ W_t = \frac{d\alpha}{du}(0)_t \]
 
-    It is the vector field along $\omega$ with $W \in T\Omega_{\omega}$.
+    It is the variation vector field $W \in T\Omega_{\omega}$.
 \end{def}
 \subsection{Theorem 12.1}
 
@@ -200,10 +202,16 @@ As a reminder without proof, a lemma from the book.
 
 \subsection{Examples and edgecases}
 
-
-Hyperbolic space
-
-Projective space
+\begin{variants}
+    \begin{var}
+        \label{ Hyperbolic space }
+        asdf
+    \end{var}
+    \begin{var}
+        \label{ Projective space}
+        asdf jölk
+    \end{var}
+\end{variants}
 
 
 
@@ -237,8 +245,12 @@ It works as a nice summary here.
 \end{thm}
 
 
+\begin{proof}
+    \cite{salamon} 4.1.3
+\end{proof}
 
 
+\subsection{Bibliography}
 
 \printbibliography
 

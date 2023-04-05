@@ -7,8 +7,7 @@
         const children = variants.children;
         var variant = [];
         for (const child of children) {
-            if (child.id.startsWith('var')) {
-                child.className = 'tab';
+            if (child.className.startsWith('var')) {
                 child.style.display = 'none';
                 variant.push(child);
             }
@@ -17,7 +16,7 @@
 
         for (const vari of variant.reverse()) {
             var btn = document.createElement('button');
-            btn.textContent = 'button ' + vari.id;
+            btn.textContent = vari.id;
             btn.className = 'tablink';
             btn.onclick = () => {
                 for (var vrr2 of variant) { // name is dumb but deal with it

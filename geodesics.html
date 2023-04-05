@@ -8,6 +8,9 @@
   <title>Ch. 12: The Energy of a Path</title>
   <style>
     html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
       color: #1a1a1a;
       background-color: #fdfdfd;
     }
@@ -19,23 +22,17 @@
       padding-top: 50px;
       padding-bottom: 50px;
       hyphens: auto;
-      overflow-wrap: break-word;
+      word-wrap: break-word;
       text-rendering: optimizeLegibility;
       font-kerning: normal;
     }
     @media (max-width: 600px) {
       body {
         font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
+        padding: 1em;
       }
     }
     @media print {
-      html {
-        background-color: white;
-      }
       body {
         background-color: transparent;
         color: black;
@@ -85,10 +82,9 @@
       color: #606060;
     }
     code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
       font-size: 85%;
       margin: 0;
-      hyphens: manual;
     }
     pre {
       margin: 1em 0;
@@ -97,7 +93,6 @@
     pre code {
       padding: 0;
       overflow: visible;
-      overflow-wrap: normal;
     }
     .sourceCode {
      background-color: transparent;
@@ -139,32 +134,20 @@
     #TOC li {
       list-style: none;
     }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
     #TOC a:not(:hover) {
       text-decoration: none;
     }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
     }
-    .hanging-indent div.csl-entry {
+    .hanging div.csl-entry {
       margin-left:2em;
       text-indent:-2em;
     }
@@ -178,17 +161,16 @@
     }
     div.csl-indent {
       margin-left: 2em;
-    }  </style>
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <script src="./src/filters.js"  type="text/javascript"      ></script>
   <script src="./src/tabs.js"     type="text/javascript" defer></script>
   <script src="./src/previews.js" type="text/javascript" defer></script>
   <link rel="stylesheet" href="./src/3leaf.css">
-  <script
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
-  type="text/javascript"></script>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 
@@ -201,192 +183,106 @@
 <h1 class="title">Ch. 12: The Energy of a Path</h1>
 <p class="author">Nicolas Trutmann</p>
 </header>
-<p>We’ll prove what would seem intuitive, namely that geodesics are
-minima of both length and energy of a path between 2 points. That is the
-project we’re working towards.</p>
-<p>that was kind of the point of geodesics in the first place. They were
-defined with the intent of making a ’minimal path’ between two points;
-an analogue of the straight line in <span
-class="math inline">\(\mathbb{R}^{n}\)</span>.</p>
-<p>Let’s give a definition:</p>
+<h2 id="definitions-and-motivation">Definitions and Motivation</h2>
+<p>We’ll prove what would seem intuitive, namely that geodesics are minima of both length and energy of a path between 2 points. That is the project we’re working towards.</p>
+<p>That was kind of the point of geodesics in the first place. They were defined with the intent of making a ’minimal path’ between two points; an analogue of the straight line in <span class="math inline">\(\mathbb{R}^{n}\)</span>.</p>
+<p>Let’s give the central definition of this chapter:</p>
 <div class="def">
-<p><strong>Definition 1</strong> (Energy of a Path). <em>Let <span
-class="math inline">\(\omega : \mathbb{R}^{} \rightarrow M\)</span> be a
-path on a Riemannian manifold with <span class="math inline">\(\omega(a)
-= p\)</span> and <span class="math inline">\(\omega(b) = q\)</span>.
-I.e. <span class="math inline">\(\omega \in \Omega_{p,q}(M)\)</span>
-<span class="math display">\[E_a^b(\omega) = \int_a^b
-\left\lVert\frac{d\omega}{dt}\right\rVert^2 dt\]</span></em></p>
-<p><em>We leave off the indices for curves parametrized on <span
-class="math inline">\([0,1]\)</span>, so <span class="math inline">\(E =
-E_0^1\)</span>.</em></p>
+<p><strong>Definition 1</strong> (Energy of a Path).  <em>Let <span class="math inline">\(\omega : \mathbb{R}^{} \rightarrow M\)</span> be a path on a Riemannian manifold with <span class="math inline">\(\omega(a) = p\)</span> and <span class="math inline">\(\omega(b) = q\)</span>. I.e. <span class="math inline">\(\omega \in \Omega_{p,q}(M)\)</span> <span class="math display">\[E_a^b(\omega) = \int_a^b \left\lVert\frac{d\omega}{dt}\right\rVert^2 dt\]</span></em></p>
 </div>
-<h2 id="the-proportional-to-arclength-argument">the proportional to
-arclength argument</h2>
-<p>a problem with curves is that we could parametrize them arbitrarily
-badly.</p>
+<p>TBD: similar to kinetic energy equation. some auth also put 1/2 in front to make it look more like it. (we’llalso see a factor 1/2 again.)</p>
+<h2 id="the-proportional-to-arclength-argument">the proportional to arclength argument</h2>
+<p>a problem with curves is that we could parametrize them arbitrarily badly.</p>
 <div id="def:reparametrization" class="def">
-<p><strong>Definition 2</strong>. <em>We say a curve <span
-class="math inline">\(\gamma\)</span> is</em></p>
+<p><strong>Definition 2</strong>.  <em>We say a curve <span class="math inline">\(\gamma\)</span> is</em></p>
 </div>
-<h2 id="sleight-of-hand-calculus-of-variations">sleight of hand:
-calculus of variations</h2>
-<p>The big cheat of these chapters is that we’re able to do calculus on
-<span class="math inline">\(\Omega(M)\)</span>. This is a priori not a
-manifold, topological space, vector field or group. It becomes, however,
-after doing some math to it.</p>
-<p>In Milnor’s book <span class="citation" data-cites="milnor">(Milnor
-1963)</span>, this problem is explicitly brushed under the table. Books
-that treat the matter more thoroughly brush it under the table with a
-few more words <span class="citation" data-cites="salamon">(Salamon and
-Robbin 2022)</span>. Here is a reference that is explicit and thorough:
-<span class="citation" data-cites="lee">(Lee 2018)</span></p>
-<p>Since Milnor hand-waves the problem, so will we. Since we still need
-intuition for what we’re skipping I provide here two pictures, which we
-will pretend is how all the curves under scrutiny look like.</p>
-<figure id="fig:boat1">
-<img src="img/grid.png" />
-<figcaption>grid shape</figcaption>
+<h2 id="sleight-of-hand-calculus-of-variations">sleight of hand: calculus of variations</h2>
+<p>The big cheat of these chapters is that we’re able to do calculus on <span class="math inline">\(\Omega(M)\)</span>. This is a priori not a manifold, topological space, vector field or group. It becomes, however, after doing some math to it.</p>
+<p>In Milnor’s book <span class="citation" data-cites="milnor">(Milnor 1963)</span>, this problem is explicitly brushed under the table. Books that treat the matter more thoroughly brush it under the table with a few more words <span class="citation" data-cites="salamon">(Salamon and Robbin 2022)</span>. Here is a reference that is explicit and thorough: <span class="citation" data-cites="lee">(Lee 2018)</span></p>
+<p>Since Milnor hand-waves the problem, so will we. Since we still need intuition for what we’re skipping I provide here two pictures, which we will pretend is how all the curves under scrutiny look like.</p>
+<figure>
+<img src="img/grid.png" id="fig:boat1" alt="grid shape" /><figcaption aria-hidden="true">grid shape</figcaption>
 </figure>
-<figure id="fig:boat1">
-<img src="img/sail.png" />
-<figcaption>variation</figcaption>
+<figure>
+<img src="img/sail.png" id="fig:boat1" alt="variation" /><figcaption aria-hidden="true">variation</figcaption>
 </figure>
-<p>What we’ll need in particular is the vector field along a
-variation.</p>
+<p>What we’ll need in particular is the vector field along a variation.</p>
 <p>Reminder:</p>
 <div id="def:vel_of_var" class="def">
-<p><strong>Definition 3</strong>. <em>The velocity of a variation <span
-class="math inline">\(\alpha: (-\epsilon, \epsilon) \rightarrow
-\Omega(M;p,q)\)</span> with <span class="math inline">\(\alpha(0) =
-\omega\)</span> is defined as</em></p>
-<p><em><span class="math display">\[W_t =
-\frac{d\alpha}{du}(0)_t\]</span></em></p>
-<p><em>It is the vector field along <span
-class="math inline">\(\omega\)</span> with <span class="math inline">\(W
-\in T\Omega_{\omega}\)</span>.</em></p>
+<p><strong>Definition 3</strong>.  <em>The velocity of a variation <span class="math inline">\(\alpha: (-\epsilon, \epsilon) \rightarrow \Omega(M;p,q)\)</span> with <span class="math inline">\(\alpha(0) = \omega\)</span> is defined as</em></p>
+<p><em><span class="math display">\[W_t = \frac{d\alpha}{du}(0)_t\]</span></em></p>
+<p><em>It is the variation vector field <span class="math inline">\(W \in T\Omega_{\omega}\)</span>.</em></p>
 </div>
 <h2 id="theorem-12.1">Theorem 12.1</h2>
 <p>Recall: <span class="math display">\[\begin{align*}
-        W_t &amp;= \frac{d\alpha}{du} \quad\text{derivative of the
-variation} \\
-        V_t &amp;= \frac{d\omega}{dt} \quad\text{velocity of $\omega$}
-\\
-        \Delta_tV &amp;= V_{t+} - V_{t-} \quad\text{discontinuity in the
-velocity vector} \\
-        A_t &amp;= \frac{D}{dt} \frac{d\omega}{dt}
-\quad\text{acceleration of $\omega$} \\
+        W_t &amp;= \frac{d\alpha}{du} \quad\text{derivative of the variation} \\
+        V_t &amp;= \frac{d\omega}{dt} \quad\text{velocity of $\omega$} \\
+        \Delta_tV &amp;= V_{t+} - V_{t-} \quad\text{discontinuity in the velocity vector} \\
+        A_t &amp;= \frac{D}{dt} \frac{d\omega}{dt} \quad\text{acceleration of $\omega$} \\
     \end{align*}\]</span></p>
-<p><span class="math inline">\(\Delta_tV = 0\)</span> for all but
-finitely many points.</p>
+<p><span class="math inline">\(\Delta_tV = 0\)</span> for all but finitely many points.</p>
 <div id="thm:12.1" class="thm">
-<p><strong>Theorem 1</strong> (Milnor’s 12.1). <em></em></p>
-<p><em>For a one-parameter variation <span
-class="math inline">\(\alpha\)</span> of <span
-class="math inline">\(\omega\)</span>, we have:</em></p>
-<p><em><span class="math display">\[\frac{1}{2} \frac{dE(\alpha(u))}{du}
-=
-        \sum_{k} \langle  W_t, \Delta_tV  \rangle \ \ + \ \ \int_0^1
-\langle  W_t, A_t  \rangle\]</span></em></p>
+<p><strong>Theorem 1</strong> (Milnor’s 12.1).  <em>For a one-parameter variation <span class="math inline">\(\alpha\)</span> of <span class="math inline">\(\omega\)</span>, we have:</em></p>
+<p><em><span class="math display">\[\frac{1}{2} \frac{dE(\alpha(u))}{du} =
+        \sum_{k} \langle  W_t, \Delta_tV  \rangle \ \ + \ \ \int_0^1 \langle  W_t, A_t  \rangle\]</span></em></p>
 </div>
 <p>As a reminder without proof, a lemma from the book.</p>
 <div class="lemm*">
-<p><strong>Lemma 1</strong> (Lemma 8.3). <em>For a compatible connection
-(read: Levi-Civita) and any vector fields <span
-class="math inline">\(V,W\)</span> along a curve <span
-class="math inline">\(\gamma\)</span>, we have <span
-class="math display">\[\frac{d}{dt}\langle V, W \rangle   =
-        \langle \frac{DV}{dt}, W \rangle + \langle V, \frac{DW}{dt}
-\rangle\]</span></em></p>
+<p><strong>Lemma 1</strong> (Lemma 8.3).  <em>For a compatible connection (read: Levi-Civita) and any vector fields <span class="math inline">\(V,W\)</span> along a curve <span class="math inline">\(\gamma\)</span>, we have <span class="math display">\[\frac{d}{dt}\langle V, W \rangle   =
+        \langle \frac{DV}{dt}, W \rangle + \langle V, \frac{DW}{dt} \rangle\]</span></em></p>
 </div>
 <div class="proof">
-<p><em><a href="#thm:12.1" data-reference-type="ref"
-data-reference="thm:12.1">1</a>.</em> To begin the proof let’s talk
-about the intuition of what we’re writing down here.</p>
-<p>What we care about in this equation is not the equation itself, but
-when it is zero. We are searching for extremal points of our
-variation.</p>
-<p>The first part of the equation tells us what we can expect from
-"kinks" in our curve. They will add to the derivative, which suggests
-that kink-free or smooth curves are candidates for geodesics.</p>
-<p>The second part concerns the acceleration must be orthogonal to <span
-class="math inline">\(W_t\)</span> to be identically zero. The intuitive
-interpretation is that our curve may not curve.</p>
-<p>Together with the fact that the velocity <span
-class="math inline">\(V_t\)</span> is constant it follows that the
-acceleration is normal on the tangent space.</p>
+<p><em><a href="#thm:12.1" data-reference-type="ref" data-reference="thm:12.1">Theorem 1</a>.</em> To begin the proof let’s talk about the intuition of what we’re writing down here.</p>
+<p>What we care about in this equation is not the equation itself, but when it is zero. We are searching for extremal points of our variation.</p>
+<p>The first part of the equation tells us what we can expect from "kinks" in our curve. They will add to the derivative, which suggests that kink-free or smooth curves are candidates for geodesics.</p>
+<p>The second part concerns the acceleration must be orthogonal to <span class="math inline">\(W_t\)</span> to be identically zero. The intuitive interpretation is that our curve may not curve.</p>
+<p>Together with the fact that the velocity <span class="math inline">\(V_t\)</span> is constant it follows that the acceleration is normal on the tangent space.</p>
 <p>The proof itself follows from a very direct computation.</p>
 <p>Take the left-hand side and insert definitions.</p>
 <p><span class="math display">\[\frac{1}{2} \frac{dE(\alpha(u))}{du} =
-        \frac{d}{du} \int_0^1 \langle \frac{\partial \alpha}{\partial
-t}, \frac{\partial \alpha}{\partial t} \rangle =
-        2 \int_0^1 \langle \frac{D}{du} \frac{\partial \alpha}{\partial
-t}, \frac{\partial \alpha}{\partial t} \rangle\]</span></p>
-<p>By Lemma 8.5 we can substitute <span
-class="math inline">\(\frac{D}{dt} \frac{\partial \alpha}{\partial
-u}\)</span> for <span class="math inline">\(\frac{D}{du} \frac{\partial
-\alpha}{\partial t}\)</span> in this last formula.</p>
-<p>Next, we partition <span class="math inline">\(t\)</span> at the
-discontinuous parts into <span class="math inline">\(0 \lt t_1 \lt
-\ldots \lt t_k \lt 1\)</span>, such that <span
-class="math inline">\(\alpha\)</span> is differentiable on the intervals
-<span class="math inline">\([t_i, t_{i+1}]\)</span>.</p>
-<p>On these intervals we do "integration by parts" of sorts, by using
-the identity</p>
-<p><span class="math display">\[\frac{d}{du} \langle \frac{\partial
-\alpha}{\partial u}, \frac{\partial \alpha}{\partial t} \rangle =
-        \langle \frac{D}{\partial u} \frac{\partial \alpha}{\partial t},
-\frac{\partial \alpha}{\partial t} \rangle
+        \frac{d}{du} \int_0^1 \langle \frac{\partial \alpha}{\partial t}, \frac{\partial \alpha}{\partial t} \rangle =
+        2 \int_0^1 \langle \frac{D}{du} \frac{\partial \alpha}{\partial t}, \frac{\partial \alpha}{\partial t} \rangle\]</span></p>
+<p>By Lemma 8.5 we can substitute <span class="math inline">\(\frac{D}{dt} \frac{\partial \alpha}{\partial u}\)</span> for <span class="math inline">\(\frac{D}{du} \frac{\partial \alpha}{\partial t}\)</span> in this last formula.</p>
+<p>Next, we partition <span class="math inline">\(t\)</span> at the discontinuous parts into <span class="math inline">\(0 \lt t_1 \lt \ldots \lt t_k \lt 1\)</span>, such that <span class="math inline">\(\alpha\)</span> is differentiable on the intervals <span class="math inline">\([t_i, t_{i+1}]\)</span>.</p>
+<p>On these intervals we do "integration by parts" of sorts, by using the identity</p>
+<p><span class="math display">\[\frac{d}{du} \langle \frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t} \rangle =
+        \langle \frac{D}{\partial u} \frac{\partial \alpha}{\partial t}, \frac{\partial \alpha}{\partial t} \rangle
         +
-        \langle \frac{\partial \alpha}{\partial t}, \frac{D}{\partial u}
-\frac{\partial \alpha}{\partial t} \rangle\]</span></p>
+        \langle \frac{\partial \alpha}{\partial t}, \frac{D}{\partial u} \frac{\partial \alpha}{\partial t} \rangle\]</span></p>
 <p>this implies</p>
 <p><span class="math display">\[asdf\]</span> ◻</p>
 </div>
 <h2 id="examples-and-edgecases">Examples and edgecases</h2>
-<p>Hyperbolic space</p>
-<p>Projective space</p>
+<div class="variants">
+<p><strong> 1</strong>. </p>
+<div id=" Hyperbolic space " class="var">
+<p><em><strong> 1</strong>.  <em>asdf</em></em></p>
+</div>
+<div id=" Projective space" class="var">
+<p><em><strong> 2</strong>.  <em>asdf jölk</em></em></p>
+</div>
+</div>
 <h2 id="the-characterization-theorem">The Characterization Theorem</h2>
-<p>Grabbed this theorem from another book (<span class="citation"
-data-cites="salamon">(Salamon and Robbin 2022)</span> 4.1.4). We have
-done about the same work, just in a different order. It works as a nice
-summary here.</p>
+<p>Grabbed this theorem from another book (<span class="citation" data-cites="salamon">(Salamon and Robbin 2022)</span> 4.1.4). We have done about the same work, just in a different order. It works as a nice summary here.</p>
 <div class="thm">
-<p><strong>Theorem 2</strong> (Characterization of Geodesics). <em>Let
-<span class="math inline">\(I = [a, b] \subset \mathbb{R}^{}\)</span> be
-a compact interval and let <span class="math inline">\(\gamma : I
-\rightarrow M\)</span> be a smooth curve. Then the following are
-equivalent.</em></p>
+<p><strong>Theorem 2</strong> (Characterization of Geodesics).  <em>Let <span class="math inline">\(I = [a, b] \subset \mathbb{R}^{}\)</span> be a compact interval and let <span class="math inline">\(\gamma : I \rightarrow M\)</span> be a smooth curve. Then the following are equivalent.</em></p>
 <ol>
-<li><p><em>γ is an extremal of the energy functional, i.e. every
-variation <span>γs</span>s∈R of γ with fixed endpoints satisfies d ds ∣
-∣s=0 E(γs) = 0.</em></p></li>
-<li><p><em>γ is parametrized proportional to the arclength, i.e. the
-veloc- ity | ̇γ(t)| ≡ c ≥ 0 is constant, and either γ is constant, i.e.
-γ(t) = p = q for all t ∈ I, or c &gt; 0 and γ is an extremal of the
-length functional, i.e. every variation <span>γs</span>s∈R of γ with
-fixed endpoints satisfies d ds ∣ ∣s=0 L(γs) = 0.</em></p></li>
-<li><p><em>The velocity vector of γ is parallel, i.e. ∇ ̇γ(t) = 0 for
-all t ∈ I.</em></p></li>
-<li><p><em>The acceleration of γ is normal to M , i.e. ̈γ(t) ⊥ Tγ(t)M
-for all t ∈ I.</em></p></li>
+<li><p><em>γ is an extremal of the energy functional, i.e. every variation <span>γs</span>s∈R of γ with fixed endpoints satisfies d ds ∣ ∣s=0 E(γs) = 0.</em></p></li>
+<li><p><em>γ is parametrized proportional to the arclength, i.e. the veloc- ity | ̇γ(t)| ≡ c ≥ 0 is constant, and either γ is constant, i.e. γ(t) = p = q for all t ∈ I, or c &gt; 0 and γ is an extremal of the length functional, i.e. every variation <span>γs</span>s∈R of γ with fixed endpoints satisfies d ds ∣ ∣s=0 L(γs) = 0.</em></p></li>
+<li><p><em>The velocity vector of γ is parallel, i.e. ∇ ̇γ(t) = 0 for all t ∈ I.</em></p></li>
+<li><p><em>The acceleration of γ is normal to M , i.e. ̈γ(t) ⊥ Tγ(t)M for all t ∈ I.</em></p></li>
 </ol>
 </div>
-<div id="refs" class="references csl-bib-body hanging-indent"
-role="list">
-<div id="ref-lee" class="csl-entry" role="listitem">
-Lee, John. 2018. <em>Introduction to Riemannian Manifolds</em>.
-International Series of Monographs on Physics. Springer International
-Publishing.
+<h2 class="unnumbered" id="bibliography">Bibliography</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-lee" class="csl-entry" role="doc-biblioentry">
+Lee, John. 2018. <em>Introduction to Riemannian Manifolds</em>. International Series of Monographs on Physics. Springer International Publishing.
 </div>
-<div id="ref-milnor" class="csl-entry" role="listitem">
-Milnor, John. 1963. <em>Morse Theory</em>. Annals of Mathematics
-Studies. Princeton University Press.
+<div id="ref-milnor" class="csl-entry" role="doc-biblioentry">
+Milnor, John. 1963. <em>Morse Theory</em>. Annals of Mathematics Studies. Princeton University Press.
 </div>
-<div id="ref-salamon" class="csl-entry" role="listitem">
-Salamon, Dietmar Arno, and Joel Robbin. 2022. <em>Introduction to
-Differential Geometry</em>. <a
-href="https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf">https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf</a>.
+<div id="ref-salamon" class="csl-entry" role="doc-biblioentry">
+Salamon, Dietmar Arno, and Joel Robbin. 2022. <em>Introduction to Differential Geometry</em>. <a href="https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf">https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf</a>.
 </div>
 </div>
 </body>

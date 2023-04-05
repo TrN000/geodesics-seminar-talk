@@ -1,6 +1,6 @@
 
 const types = ['def', 'thm', 'proof', 'lemm*']
-const tags = ['p']
+const tags = ['p', 'figure']
 
 function oneOnly(name) {
     for (const type of types) {
@@ -12,7 +12,7 @@ function oneOnly(name) {
         }
     }
     for (const element of document.body.children) {
-        if (element.tagName === 'P') {
+        if (tags.includes(element.tagName.toLowerCase())) {
             element.style.display = 'none';
         }
         //     element.style.display = 'block';

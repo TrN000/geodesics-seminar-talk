@@ -2,6 +2,7 @@
 
 \usepackage{amsmath,amssymb,amsthm}
 
+\usepackage{hyperref}
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
 
@@ -15,6 +16,7 @@
 \newtheorem{lem}{Lemma}
 \newtheorem{proof}{Proof}
 \newtheorem{rk}{Remark}
+\newtheorem{cor}{Corollary}
 \newtheorem*{lemm*}{Lemma}
 \newtheorem*{variants}{}
 \newtheorem*{var}{}
@@ -24,24 +26,38 @@
 \newcommand{\rmfd}[1]{Riemannian manifold}
 \newcommand{\angle}[1]{\langle #1 \rangle}
 \newcommand{\OM}{\Omega(M)}
+\newcommand{\ome}{ $\omega$ }
 
 \title{Ch. 12: The Energy of a Path}
 \author{Nicolas Trutmann}
 \date{}
 
 \begin{document}
+
+\includegraphics{img/qr.png}
+
+link: \href{https://trn000.github.io/geodesics-seminar-talk/geodesics}{https://trn000.github.io/geodesics-seminar-talk/geodesics}
+
+repo: \href{https://github.com/TrN000/geodesics-seminar-talk}{https://github.com/TrN000/geodesics-seminar-talk}
+
+
 \maketitle
+
+
+
 
 
 \subsection{Definitions and Motivation}
 
-We'll prove what would seem intuitive, namely that geodesics are minima of both length and energy of
+We'll prove what would seem intuitive, namely that geodesics are extrema of both length and energy of
 a path between 2 points. That is the project we're working towards.
 
-That was kind of the point of geodesics in the first place. They were defined with the intent of
-making a 'minimal path' between two points; an analogue of the straight line in $\Rn$.
+That was the point of geodesics in the first place when Gauss first introduced
+them. They were defined with the intent of making a 'minimal path' between two
+points; an analogue of the straight line in $\Rn$.
 
-Let's give the central definition of this chapter:
+
+Let's first give the central definition of this chapter:
 
 \begin{def}[Energy of a Path]
 Let $\omega : \Rn[] \rightarrow M $ be a path on a \rmfd, with $\omega(a) = p$ and $\omega(b) = q$.
@@ -49,20 +65,68 @@ I.e. $\omega \in \Omega_{p,q}(M)$
 \[ E_a^b(\omega) = \int_a^b \Absbars{\frac{d\omega}{dt}}^2 dt \]
 \end{def}
 
-TBD: similar to kinetic energy equation. some auth also put 1/2 in front to make it look more like it. (we'llalso see a factor 1/2 again.)
+This definition is styled after the similar kinetic energy equation
+$\frac{1}{2}mv^2$.  Some authors even put $\frac{1}{2}$ in front of it to make
+it look more like it. (We'll also see a factor 1/2 again.)
 
-\subsection{the proportional to arclength argument}
+Compare this to the arc length functional from earlier in the book:
 
-a problem with curves is that we could parametrize them arbitrarily badly.
+\[
+     L_a^b(\omega) = \int_a^b \Absbars{\frac{d\omega}{dt}} dt
+\]
+
+If we apply Schwarz's inequality
+
+\[
+    \left( \int_a^b fg dt \right)^2
+    \leq
+    \left( \int_a^b f^2 dt \right)    \left( \int_a^b g^2 dt \right)
+\]
+
+with $f = 1$ and $g = \Absbars{\frac{d\omega}{dt}}$ we see that
+
+\[
+    \left( L_a^b \right)^2
+    \leq
+    (b - a)\left( E_a^b \right)
+\]
+
+with equality iff the function $g$ is constant, that is the parameter $t$ is
+proportional to arc length.
+
+\begin{lem} Let $M$ be a complete \rmfd and let $p,q \in M$ have distance $d$. Then the energy function
+    \[
+        E: \Omega(M;p,q) \rightarrow R
+    \]
+    takes on its minimum precisely on the set of minimal geodesics from $p$ to $q$.
+\end{lem}
+
+
+\begin{proof}
+    Suppose that there exists a minimal geodesic $\gamma$ from $p = \omega(0)$
+    to $q = \omega ( 1 )$. Then
+    \[E(\gamma) = L(\gamma)^2 \leq L( \omega )^2 \leq E(w) \]
+    Here the equality $L( \gamma ) = L(\omega)$ can hold only if $\omega$ is also a minimal
+    geodesic, possibly reparametrized.
+    On the other hand the equality $L ( \omega )^2 = E( \omega)$ can hold only if the parameter is proportional
+    to arc length along $\omega$ . This proves that $E ( \omega ) < E(\omega)$ unless $\omega$ is also
+    a minimal geodesic.
+\end{proof}
+
+
+
+
+
+
+
+\subsection{The proportional-to-arc-length argument}
+
+A problem with curves is that we could parametrize them arbitrarily badly.
 
 \begin{def}
     \label{def:reparametrization}
     We say a curve $\gamma$ is
 \end{def}
-
-
-
-
 
 \subsection{sleight of hand: calculus of variations}
 
@@ -72,7 +136,7 @@ It becomes, however, after doing some math to it.
 
 In Milnor's book \cite{milnor}, this problem is explicitly brushed under the table.
 Books that treat the matter more thoroughly brush it under the table with a few more words
-\cite{salamon}.
+\cite{salamon} 4.1.7.
 Here is a reference that is explicit and thorough: \cite{lee}
 
 Since Milnor hand-waves the problem, so will we. Since we still need intuition for what we're
@@ -82,12 +146,12 @@ look like.
 \begin{figure}
     \includegraphics{img/grid.png}
     \caption{grid shape}
-    \label{fig:boat1}
+    \label{fig:grid}
 \end{figure}
 \begin{figure}
     \includegraphics{img/sail.png}
-    \caption{variation}
-    \label{fig:boat1}
+    \caption{variation of a curve}
+    \label{fig:sail}
 \end{figure}
 
 
@@ -101,9 +165,9 @@ Reminder:
     The velocity of a variation $\alpha: (-\epsilon, \epsilon) \rightarrow \Omega(M;p,q)$ with
     $\alpha(0) = \omega$ is defined as
 
-    \[ W_t = \frac{d\alpha}{du}(0)_t \]
+    \[ W_t = \frac{d\alpha}{du}(0)_t = \frac{d\alpha}{du}(0, t) \]
 
-    It is the variation vector field $W \in T\Omega_{\omega}$.
+    It is the \textbf{variation vector field} $W \in T\Omega_{\omega}$.
 \end{def}
 \subsection{Theorem 12.1}
 
@@ -124,7 +188,7 @@ $\Delta_tV = 0$ for all but finitely many points.
 \begin{thm}[Milnor's 12.1]
     \label{thm:12.1}
 
-    For a one-parameter variation $\alpha$ of $\omega$, we have:
+    For a variation $\alpha$ of $\omega$, we have:
 
     \[
         \frac{1}{2} \frac{dE(\alpha(u))}{du} =
@@ -140,13 +204,13 @@ As a reminder without proof, a lemma from the book.
     $\gamma$, we have
     \[
         \frac{d}{dt}\langle V, W \rangle   =
-        \langle \frac{DV}{dt}, W \rangle + \langle V, \frac{DW}{dt} \rangle
+        - \langle \frac{DV}{dt}, W \rangle - \langle V, \frac{DW}{dt} \rangle
     \]
 \end{lemm*}
 
 
 
-\begin{proof}[\ref{thm:12.1}]
+\begin{proof}[proof of \ref{thm:12.1}]
     To begin the proof let's talk about the intuition of what we're writing down here.
 
     What we care about in this equation is not the equation itself, but when it is zero. We are
@@ -161,6 +225,13 @@ As a reminder without proof, a lemma from the book.
 
     Together with the fact that the velocity $V_t$ is constant it follows that the acceleration is
     normal on the tangent space.
+
+
+    \begin{figure}
+        \includegraphics{img/kinky.png}
+        \caption{kinks in our curves}
+        \label{fig:kinky}
+    \end{figure}
 
 
     The proof itself follows from a very direct computation.
@@ -184,40 +255,87 @@ As a reminder without proof, a lemma from the book.
     On these intervals we do "integration by parts" of sorts, by using the identity
 
     \[
-        \frac{d}{du} \angle{\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}} =
-        \angle{\frac{D}{\partial u} \frac{\partial \alpha}{\partial t}, \frac{\partial \alpha}{\partial t}}
+        \frac{d}{dt} \angle{\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}} =
+        \angle{\frac{D}{\partial t} \frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}}
         +
-        \angle{\frac{\partial \alpha}{\partial t}, \frac{D}{\partial u} \frac{\partial \alpha}{\partial t}}
+        \angle{\frac{\partial \alpha}{\partial t}, \frac{D}{\partial t} \frac{\partial \alpha}{\partial t}}
     \]
 
     this implies
 
     \[
-        asdf
+        \int_{t_{i-1}}^{t_i} \angle{\frac{D}{\partial t} \frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}}
+        =
+        \left.  \angle{\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}} \right\vert_{t=t_{i-1} +}^{t=t_i -}
+        -
+        \int_{t_{i-1}}^{t_i} \angle{\frac{\partial \alpha}{\partial t}, \frac{D}{\partial t} \frac{\partial \alpha}{\partial t}}
     \]
+
+    Gluing these together yields the desired formula. The first term works like
+    an inverse telescoping sum, where the inner terms don't cancel out and the
+    first and last terms disappear, since $\partial \alpha / \partial u = 0$ at
+    the end points.
+
+    \[
+        \frac{1}{2} \frac{dE(\alpha(u))}{du}
+        =
+        - \sum_{i=1}^{k-1} \angle{\frac{\partial \alpha}{\partial u}, \Delta \frac{\partial \alpha}{\partial t}}
+        -
+        \int_{0}^{1} \angle{\frac{\partial \alpha}{\partial t}, \frac{D}{\partial t} \frac{\partial \alpha}{\partial t}}
+    \]
+
+    And at $u = 0$
+
+    \[
+        \frac{1}{2} \frac{dE(\alpha(u))}{du}
+        =
+        - \langle \frac{DV}{dt}, W \rangle - \langle V, \frac{DW}{dt} \rangle
+    \]
+
+    unfinished
+\end{proof}
+
+\begin{cor}
+    The path $\omega$ is a critical point for the function $E$ if and only if $\omega$ is a geodesic.
+\end{cor}
+
+\begin{proof}
+
+    "$\Leftarrow$": From the earlier Lemma we know that the energy function takes on its minimum on geodesics so it follows that it is a critical point.
+
+    "$\Rightarrow$":
+
+
+    Let \ome be a critical point . There is a variation of \ome with $W(t) = f (t)A(t)$ where
+    $f(t)$ is positive.
+    Then
+    \[
+        \frac{1}{2}\frac{dE}{du} = - \int_0^1 f(t) \angle{A(t), A(t)} dt
+    \]
+    This is zero if and only if $A(t) = 0$ for all $t$.
+
 
 \end{proof}
 
 
-
 \subsection{Examples and edgecases}
 
-\begin{variants}
-    \begin{var}
-        \label{ Hyperbolic space }
-        asdf
-    \end{var}
-    \begin{var}
-        \label{ Projective space}
-        asdf jölk
-    \end{var}
-\end{variants}
+% \begin{variants}
+%     \begin{var}
+%         \label{ Hyperbolic space }
+%         asdf
+%     \end{var}
+%     \begin{var}
+%         \label{ Projective space}
+%         asdf jölk
+%     \end{var}
+% \end{variants}
 
 
 
 \subsection{The Characterization Theorem}
 
-Grabbed this theorem from another book (\cite{salamon} 4.1.4).
+I grabbed this theorem from another book (\cite{salamon} 4.1.4).
 We have done about the same work, just in a different order.
 It works as a nice summary here.
 

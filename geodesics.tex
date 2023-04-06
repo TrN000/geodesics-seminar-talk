@@ -94,7 +94,9 @@ with $f = 1$ and $g = \Absbars{\frac{d\omega}{dt}}$ we see that
 with equality iff the function $g$ is constant, that is the parameter $t$ is
 proportional to arc length.
 
-\begin{lem} Let $M$ be a complete \rmfd and let $p,q \in M$ have distance $d$. Then the energy function
+\begin{lem}
+    \label{lem:geod-min}
+    Let $M$ be a complete \rmfd and let $p,q \in M$ have distance $d$. Then the energy function
     \[
         E: \Omega(M;p,q) \rightarrow R
     \]
@@ -123,10 +125,38 @@ proportional to arc length.
 
 A problem with curves is that we could parametrize them arbitrarily badly.
 
-\begin{def}
-    \label{def:reparametrization}
-    We say a curve $\gamma$ is
-\end{def}
+The concept of a geodesic in a manifold generalizes that of a straight line in
+Euclidean space. A straight line in $\Rn[2]$ has parametrizations of form $t
+\mapsto \gamma → p + \sigma(t)v$ where $\sigma : \Rn[] → \Rn[]$ is a
+diffeomorphism and $p, v \in \Rn[]$.
+
+Different choices of $\sigma$ yield different parametrizations of the same
+line. Certain parametrizations are preferred, for example those
+parametrizations which are "proportional to the arc length", i.e. where
+$\sigma(t) = at + b$ for constants $a, b \in \Rn[]$, so that the tangent vector
+$\dot{\sigma}(t)v$ has constant length.
+
+Arc length is invariant under reparametrization but energy need not be.
+
+\begin{rk}[Reparametrization]
+    Let $I = [a, b]$ and $I' = [a', b']$ be compact intervals. If $\gamma : I
+    \rightarrow \Rn$ is a smooth curve and $\sigma : I' \rightarrow I$ is a
+    smooth function such that $\sigma(a') = a$, $\sigma(b') = b$, and
+    $\dot{\sigma}(t') ≥ 0$ for all $t' \in I'$, then the curves $\gamma$ and
+    $\gamma \circ \sigma$ have the same length. Namely,
+    \[
+        L(\gamma  \circ \sigma)
+        = \int_{a'}^{b'} \left|\frac{d}{dt} \gamma(\sigma(t')) \right| dt'
+        = \int_{a'}^{b'} \left|\frac{d}{dt} \dot{\gamma}(\sigma(t')) \right| \dot{\sigma}(t') dt'
+        = L(\gamma  \circ \sigma)
+        \
+    \]
+    Here second equality follows from the chain rule and the third equality
+    follows from the change of variables formula for the Riemann integral.
+\end{rk}
+
+
+
 
 \subsection{sleight of hand: calculus of variations}
 
@@ -301,7 +331,7 @@ As a reminder without proof, a lemma from the book.
 
 \begin{proof}
 
-    "$\Leftarrow$": From the earlier Lemma we know that the energy function takes on its minimum on geodesics so it follows that it is a critical point.
+    "$\Leftarrow$": From the earlier Lemma \ref{lem:geod-min} we know that the energy function takes on its minimum on geodesics so it follows that it is a critical point.
 
     "$\Rightarrow$":
 
@@ -314,51 +344,47 @@ As a reminder without proof, a lemma from the book.
     \]
     This is zero if and only if $A(t) = 0$ for all $t$.
 
+    Now we treat the discontinuities. At the $t_i$ where \ome is discontinuous we have
+    $\frac{1}{2}\frac{dE}{du} = -\sum \angle{\Delta_{t_i}V, \Delta_{t_i}V}$ which can only be zero when all $\Delta_{t_i}V$ are zero.
+
 
 \end{proof}
 
 
-\subsection{Examples and edgecases}
 
-% \begin{variants}
-%     \begin{var}
-%         \label{ Hyperbolic space }
-%         asdf
-%     \end{var}
-%     \begin{var}
-%         \label{ Projective space}
-%         asdf jölk
-%     \end{var}
-% \end{variants}
+\subsection{Recap: Characterization Theorem}
 
-
-
-\subsection{The Characterization Theorem}
 
 I grabbed this theorem from another book (\cite{salamon} 4.1.4).
 We have done about the same work, just in a different order.
-It works as a nice summary here.
+It works as a nice summary of the discussed material.
 
 \begin{thm}[Characterization of Geodesics]
-    Let $I = [a, b] \subset \Rn[]$ be a compact interval and let $\gamma : I \rightarrow M$ be a
+    Let $I = [a, b] \subset \Rn[]$ be a compact interval and let $\omega : I \rightarrow M$ be a
     smooth curve. Then the following are equivalent.
+
     \begin{enumerate}
-    \item γ is an extremal of the energy functional, i.e. every variation {γs}s∈R
-        of γ with fixed endpoints satisfies
-        d
-        ds
-        ∣
-        ∣s=0 E(γs) = 0.
-    \item γ is parametrized proportional to the arclength, i.e. the veloc-
-        ity |  ̇γ(t)| ≡ c ≥ 0 is constant, and either γ is constant, i.e. γ(t) = p = q for
-        all t ∈ I, or c > 0 and γ is an extremal of the length functional, i.e.
-        every variation {γs}s∈R of γ with fixed endpoints satisfies
-        d
-        ds
-        ∣
-        ∣s=0 L(γs) = 0.
-    \item The velocity vector of γ is parallel, i.e. ∇  ̇γ(t) = 0 for all t ∈ I.
-    \item The acceleration of γ is normal to M , i.e.  ̈γ(t) ⊥ Tγ(t)M for all t ∈ I.
+        \item
+            (definition)
+            The velocity vector of $\omega$ is parallel, i.e. $\nabla  ̇\omega(t) = 0$ for all $t \in I$.
+        \item
+            (extremal energy) $\omega$ is an extremal of the energy functional, i.e. every variation $\alpha \in \Omega(M)$
+            of $\omega$ with fixed endpoints satisfies
+            \[
+                \frac{d}{dt} E(\omega) = 0
+            \]
+        \item
+            (extremal length)
+            $\omega$ is parametrized proportional to the arc length, i.e. the velocity
+            $\dot{\omega}(t) \equiv c ≥ 0$ is constant, and either $\omega$ is constant, i.e. $\omega(t) = p = q$ for
+            all $t \in I$, or $c > 0$ and $\omega$ is an extremal of the length functional, i.e.
+            every variation $\alpha \in \Omega(M)$ of $\omega$ with fixed endpoints satisfies
+            \[
+                \frac{d}{dt} L(\omega) = 0
+            \]
+        \item
+            (perpendicular acceleration)
+            The acceleration of $\omega$ is normal to $M$ , i.e. $\ddot{\omega}(t) \perp T_{\omega(t)}M$ for all $t \in I$.
     \end{enumerate}
 \end{thm}
 

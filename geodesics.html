@@ -246,7 +246,7 @@ class="math inline">\(g =
 <p>with equality iff the function <span class="math inline">\(g\)</span>
 is constant, that is the parameter <span
 class="math inline">\(t\)</span> is proportional to arc length.</p>
-<div class="lem">
+<div id="lem:geod-min" class="lem">
 <p><strong>Lemma 1</strong>. <em>Let <span
 class="math inline">\(M\)</span> be a complete Riemannian manifoldnd let
 <span class="math inline">\(p,q \in M\)</span> have distance <span
@@ -275,9 +275,47 @@ class="math inline">\(\omega\)</span> is also a minimal geodesic. ◻</p>
 proportional-to-arc-length argument</h2>
 <p>A problem with curves is that we could parametrize them arbitrarily
 badly.</p>
-<div id="def:reparametrization" class="def">
-<p><strong>Definition 2</strong>. <em>We say a curve <span
-class="math inline">\(\gamma\)</span> is</em></p>
+<p>The concept of a geodesic in a manifold generalizes that of a
+straight line in Euclidean space. A straight line in <span
+class="math inline">\(\mathbb{R}^{2}\)</span> has parametrizations of
+form <span class="math inline">\(t
+\mapsto \gamma → p + \sigma(t)v\)</span> where <span
+class="math inline">\(\sigma : \mathbb{R}^{} → \mathbb{R}^{}\)</span> is
+a diffeomorphism and <span class="math inline">\(p, v \in
+\mathbb{R}^{}\)</span>.</p>
+<p>Different choices of <span class="math inline">\(\sigma\)</span>
+yield different parametrizations of the same line. Certain
+parametrizations are preferred, for example those parametrizations which
+are "proportional to the arc length", i.e. where <span
+class="math inline">\(\sigma(t) = at + b\)</span> for constants <span
+class="math inline">\(a, b \in \mathbb{R}^{}\)</span>, so that the
+tangent vector <span class="math inline">\(\dot{\sigma}(t)v\)</span> has
+constant length.</p>
+<p>Arc length is invariant under reparametrization but energy need not
+be.</p>
+<div class="rk">
+<p><strong>Remark 1</strong> (Reparametrization). <em>Let <span
+class="math inline">\(I = [a, b]\)</span> and <span
+class="math inline">\(I&#39; = [a&#39;, b&#39;]\)</span> be compact
+intervals. If <span class="math inline">\(\gamma : I
+    \rightarrow \mathbb{R}^{n}\)</span> is a smooth curve and <span
+class="math inline">\(\sigma : I&#39; \rightarrow I\)</span> is a smooth
+function such that <span class="math inline">\(\sigma(a&#39;) =
+a\)</span>, <span class="math inline">\(\sigma(b&#39;) = b\)</span>, and
+<span class="math inline">\(\dot{\sigma}(t&#39;) ≥ 0\)</span> for all
+<span class="math inline">\(t&#39; \in I&#39;\)</span>, then the curves
+<span class="math inline">\(\gamma\)</span> and <span
+class="math inline">\(\gamma \circ \sigma\)</span> have the same length.
+Namely, <span class="math display">\[L(\gamma  \circ \sigma)
+        = \int_{a&#39;}^{b&#39;} \left|\frac{d}{dt}
+\gamma(\sigma(t&#39;)) \right| dt&#39;
+        = \int_{a&#39;}^{b&#39;} \left|\frac{d}{dt}
+\dot{\gamma}(\sigma(t&#39;)) \right| \dot{\sigma}(t&#39;) dt&#39;
+        = L(\gamma  \circ \sigma)
+        \
+\]</span> Here second equality follows from the chain rule and the third
+equality follows from the change of variables formula for the Riemann
+integral.</em></p>
 </div>
 <h2 id="sleight-of-hand-calculus-of-variations">sleight of hand:
 calculus of variations</h2>
@@ -306,7 +344,7 @@ will pretend is how all the curves under scrutiny look like.</p>
 variation.</p>
 <p>Reminder:</p>
 <div id="def:vel_of_var" class="def">
-<p><strong>Definition 3</strong>. <em>The velocity of a variation <span
+<p><strong>Definition 2</strong>. <em>The velocity of a variation <span
 class="math inline">\(\alpha: (-\epsilon, \epsilon) \rightarrow
 \Omega(M;p,q)\)</span> with <span class="math inline">\(\alpha(0) =
 \omega\)</span> is defined as</em></p>
@@ -432,8 +470,10 @@ class="math inline">\(\omega\)</span> is a geodesic.</em></p>
 </div>
 <div class="proof">
 <p><em>Proof.</em> "<span class="math inline">\(\Leftarrow\)</span>":
-From the earlier Lemma we know that the energy function takes on its
-minimum on geodesics so it follows that it is a critical point.</p>
+From the earlier Lemma <a href="#lem:geod-min" data-reference-type="ref"
+data-reference="lem:geod-min">1</a> we know that the energy function
+takes on its minimum on geodesics so it follows that it is a critical
+point.</p>
 <p>"<span class="math inline">\(\Rightarrow\)</span>":</p>
 <p>Let <span class="math inline">\(\omega\)</span> be a critical point .
 There is a variation of <span class="math inline">\(\omega\)</span> with
@@ -442,33 +482,55 @@ class="math inline">\(f(t)\)</span> is positive. Then <span
 class="math display">\[\frac{1}{2}\frac{dE}{du} = - \int_0^1 f(t)
 \langle A(t), A(t) \rangle dt\]</span> This is zero if and only if <span
 class="math inline">\(A(t) = 0\)</span> for all <span
-class="math inline">\(t\)</span>. ◻</p>
+class="math inline">\(t\)</span>.</p>
+<p>Now we treat the discontinuities. At the <span
+class="math inline">\(t_i\)</span> where <span
+class="math inline">\(\omega\)</span> is discontinuous we have <span
+class="math inline">\(\frac{1}{2}\frac{dE}{du} = -\sum \langle
+\Delta_{t_i}V, \Delta_{t_i}V \rangle\)</span> which can only be zero
+when all <span class="math inline">\(\Delta_{t_i}V\)</span> are
+zero. ◻</p>
 </div>
-<h2 id="examples-and-edgecases">Examples and edgecases</h2>
-<h2 id="the-characterization-theorem">The Characterization Theorem</h2>
+<h2 id="recap-characterization-theorem">Recap: Characterization
+Theorem</h2>
 <p>I grabbed this theorem from another book (<span class="citation"
 data-cites="salamon">(Salamon and Robbin 2022)</span> 4.1.4). We have
 done about the same work, just in a different order. It works as a nice
-summary here.</p>
+summary of the discussed material.</p>
 <div class="thm">
 <p><strong>Theorem 2</strong> (Characterization of Geodesics). <em>Let
 <span class="math inline">\(I = [a, b] \subset \mathbb{R}^{}\)</span> be
-a compact interval and let <span class="math inline">\(\gamma : I
+a compact interval and let <span class="math inline">\(\omega : I
 \rightarrow M\)</span> be a smooth curve. Then the following are
 equivalent.</em></p>
 <ol>
-<li><p><em>γ is an extremal of the energy functional, i.e. every
-variation <span>γs</span>s∈R of γ with fixed endpoints satisfies d ds ∣
-∣s=0 E(γs) = 0.</em></p></li>
-<li><p><em>γ is parametrized proportional to the arclength, i.e. the
-veloc- ity | ̇γ(t)| ≡ c ≥ 0 is constant, and either γ is constant, i.e.
-γ(t) = p = q for all t ∈ I, or c &gt; 0 and γ is an extremal of the
-length functional, i.e. every variation <span>γs</span>s∈R of γ with
-fixed endpoints satisfies d ds ∣ ∣s=0 L(γs) = 0.</em></p></li>
-<li><p><em>The velocity vector of γ is parallel, i.e. ∇ ̇γ(t) = 0 for
-all t ∈ I.</em></p></li>
-<li><p><em>The acceleration of γ is normal to M , i.e. ̈γ(t) ⊥ Tγ(t)M
-for all t ∈ I.</em></p></li>
+<li><p><em>(definition) The velocity vector of <span
+class="math inline">\(\omega\)</span> is parallel, i.e. <span
+class="math inline">\(\nabla  ̇\omega(t) = 0\)</span> for all <span
+class="math inline">\(t \in I\)</span>.</em></p></li>
+<li><p><em>(extremal energy) <span class="math inline">\(\omega\)</span>
+is an extremal of the energy functional, i.e. every variation <span
+class="math inline">\(\alpha \in \Omega(M)\)</span> of <span
+class="math inline">\(\omega\)</span> with fixed endpoints satisfies
+<span class="math display">\[\frac{d}{dt} E(\omega) =
+0\]</span></em></p></li>
+<li><p><em>(extremal length) <span class="math inline">\(\omega\)</span>
+is parametrized proportional to the arc length, i.e. the velocity <span
+class="math inline">\(\dot{\omega}(t) \equiv c ≥ 0\)</span> is constant,
+and either <span class="math inline">\(\omega\)</span> is constant, i.e.
+<span class="math inline">\(\omega(t) = p = q\)</span> for all <span
+class="math inline">\(t \in I\)</span>, or <span class="math inline">\(c
+&gt; 0\)</span> and <span class="math inline">\(\omega\)</span> is an
+extremal of the length functional, i.e. every variation <span
+class="math inline">\(\alpha \in \Omega(M)\)</span> of <span
+class="math inline">\(\omega\)</span> with fixed endpoints satisfies
+<span class="math display">\[\frac{d}{dt} L(\omega) =
+0\]</span></em></p></li>
+<li><p><em>(perpendicular acceleration) The acceleration of <span
+class="math inline">\(\omega\)</span> is normal to <span
+class="math inline">\(M\)</span> , i.e. <span
+class="math inline">\(\ddot{\omega}(t) \perp T_{\omega(t)}M\)</span> for
+all <span class="math inline">\(t \in I\)</span>.</em></p></li>
 </ol>
 </div>
 <div class="proof">

@@ -146,8 +146,8 @@ Arc length is invariant under reparametrization but energy need not be.
     $\gamma \circ \sigma$ have the same length. Namely,
     \[
         L(\gamma  \circ \sigma)
-        = \int_{a'}^{b'} \left|\frac{d}{dt} \gamma(\sigma(t')) \right| dt'
-        = \int_{a'}^{b'} \left|\frac{d}{dt} \dot{\gamma}(\sigma(t')) \right| \dot{\sigma}(t') dt'
+        = \int_{a'}^{b'} \left|\frac{d}{dt'} \gamma(\sigma(t')) \right| dt'
+        = \int_{a'}^{b'} \left| \dot{\gamma}(\sigma(t')) \right| \dot{\sigma}(t') dt'
         = L(\gamma  \circ \sigma)
         \
     \]
@@ -158,9 +158,11 @@ Arc length is invariant under reparametrization but energy need not be.
 
 
 
-\subsection{sleight of hand: calculus of variations}
 
-The big cheat of these chapters is that we're able to do calculus on $\OM$.
+
+\subsection{Sleight of hand: calculus of variations}
+
+The big cheat of this chapter is that we're able to do calculus on $\OM$.
 This is a priori not a manifold, topological space, vector field or group.
 It becomes, however, after doing some math to it.
 
@@ -199,8 +201,16 @@ Reminder:
 
     It is the \textbf{variation vector field} $W \in T\Omega_{\omega}$.
 \end{def}
+
+
+
+
+
+
 \subsection{Theorem 12.1}
 
+We're now going to do the main theorem of this section.
+For this, we reintroduce the main actors that are relevant for the proof.
 
 Recall:
 \[
@@ -214,17 +224,21 @@ Recall:
 
 $\Delta_tV = 0$ for all but finitely many points.
 
+\begin{figure}
+    \includegraphics{img/kinky.png}
+    \caption{kinks in our curves}
+    \label{fig:kinky}
+\end{figure}
+
+
 
 \begin{thm}[Milnor's 12.1]
     \label{thm:12.1}
-
     For a variation $\alpha$ of $\omega$, we have:
-
     \[
         \frac{1}{2} \frac{dE(\alpha(u))}{du} =
         \sum_{k} \angle{ W_t, \Delta_tV } \ \ + \ \ \int_0^1 \angle{ W_t, A_t }
     \]
-
 \end{thm}
 
 As a reminder without proof, a lemma from the book.
